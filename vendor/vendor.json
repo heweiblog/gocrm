@@ -1,0 +1,99 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "qlEzrgKgIkh7y0ePm9BNo1cNdXo=",
+			"path": "github.com/gin-contrib/sse",
+			"revision": "06e6e3d866e43b8fad2615b422d3bf05fd63d9be",
+			"revisionTime": "2020-08-15T10:46:36Z"
+		},
+		{
+			"checksumSHA1": "cpELhz30Sco7IBwvI6FyuShnjnQ=",
+			"path": "github.com/gin-gonic/gin",
+			"revision": "d459835d2b077e44f7c9b453505ee29881d5d12d",
+			"revisionTime": "2017-07-02T09:28:26Z",
+			"version": "v1.2",
+			"versionExact": "v1.2"
+		},
+		{
+			"checksumSHA1": "YVt5lqmGq95m5tFdiz5pr2BF1Jo=",
+			"path": "github.com/gin-gonic/gin/binding",
+			"revision": "d459835d2b077e44f7c9b453505ee29881d5d12d",
+			"revisionTime": "2017-07-02T09:28:26Z",
+			"version": "v1.2",
+			"versionExact": "v1.2"
+		},
+		{
+			"checksumSHA1": "M3FwiqpVbXwo9t2FyI5/gKxCDKY=",
+			"path": "github.com/gin-gonic/gin/render",
+			"revision": "d459835d2b077e44f7c9b453505ee29881d5d12d",
+			"revisionTime": "2017-07-02T09:28:26Z",
+			"version": "v1.2",
+			"versionExact": "v1.2"
+		},
+		{
+			"checksumSHA1": "OKHDagZqEfz5MPezTSslPqFBxoQ=",
+			"path": "github.com/golang/protobuf/proto",
+			"revision": "4846b58453b3708320bdb524f25cc5a1d9cda4d4",
+			"revisionTime": "2020-10-15T06:18:29Z"
+		},
+		{
+			"checksumSHA1": "CQ794EIFp/4zTVi4redzOXOPY8k=",
+			"path": "github.com/mattn/go-isatty",
+			"revision": "cb30d6282491c185f77d9bec5d25de1bb61a06bc",
+			"revisionTime": "2020-01-28T10:39:42Z"
+		},
+		{
+			"checksumSHA1": "pHz2CKzZqrS6vByKjehd62FhiPc=",
+			"path": "github.com/ugorji/go/codec",
+			"revision": "d5ae2e3c10027c0c7cf16b8cb1f194580a0c1024",
+			"revisionTime": "2020-11-02T11:34:10Z"
+		},
+		{
+			"path": "golang.org/x/sys/unix",
+			"revision": ""
+		},
+		{
+			"path": "google.golang.org/protobuf/encoding/prototext",
+			"revision": ""
+		},
+		{
+			"path": "google.golang.org/protobuf/encoding/protowire",
+			"revision": ""
+		},
+		{
+			"path": "google.golang.org/protobuf/proto",
+			"revision": ""
+		},
+		{
+			"path": "google.golang.org/protobuf/reflect/protoreflect",
+			"revision": ""
+		},
+		{
+			"path": "google.golang.org/protobuf/reflect/protoregistry",
+			"revision": ""
+		},
+		{
+			"path": "google.golang.org/protobuf/runtime/protoiface",
+			"revision": ""
+		},
+		{
+			"path": "google.golang.org/protobuf/runtime/protoimpl",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "P/k5ZGf0lEBgpKgkwy++F7K1PSg=",
+			"path": "gopkg.in/go-playground/validator.v8",
+			"revision": "5f1438d3fca68893a817e4a66806cea46a9e4ebf",
+			"revisionTime": "2017-07-30T05:02:35Z"
+		},
+		{
+			"checksumSHA1": "wZxi5gt6Zfs4vh8795dNA/lva7g=",
+			"path": "gopkg.in/yaml.v2",
+			"revision": "0b1645d91e851e735d3e23330303ce81f70adbe3",
+			"revisionTime": "2020-05-06T23:08:38Z"
+		}
+	],
+	"rootPath": "gocrm"
+}
