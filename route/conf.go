@@ -24,6 +24,7 @@ func GetConfig(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"status": "received",
 		"rcode":  0,
+		"conf":   "test",
 	})
 }
 
@@ -52,5 +53,6 @@ func AllConfig(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"status": "received",
 		"rcode":  0,
+		"conf":   "all",
 	})
 }
