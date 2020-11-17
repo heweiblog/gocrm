@@ -1,7 +1,7 @@
 package models
 
 import (
-	"gorm.io/driver/mysql"
+	//"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
@@ -12,6 +12,5 @@ type Switch struct {
 	Switch string
 }
 
-func (s *Switch) Update() {
-
-}
+//func (s *Switch) Update() {
+//}

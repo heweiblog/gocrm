@@ -1,11 +1,11 @@
 package models
 
 import (
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
+//"gorm.io/driver/mysql"
+//"gorm.io/gorm"
 )
 
-type Product struct {
+type Oplog struct {
 	Id      uint   `gorm:"primary_key" json:"vid"`
 	Mid     uint   `json:"id"`
 	Bt      string `gorm:type:varchar(40);not null" json:"bt"`

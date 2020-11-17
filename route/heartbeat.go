@@ -18,9 +18,9 @@ func Heartbeat(c *gin.Context) {
 	m["softwareversion"] = "gcrm-1.1.1"
 	m["licenseinfo"] = "abcABC=="
 	//m["test"] = People{Name: "hw", Age: 18}
-	m["test"] = struct{Name:string
-		Age int
-		}{"hw", 18}
+	//m["test"] = struct{Name:string
+	//Age int
+	//}{"hw", 18}
 
 	c.JSON(200, m)
 }
