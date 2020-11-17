@@ -6,6 +6,8 @@ import (
 	"gocrm/route"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"io"
+	"os"
 )
 
 type Product struct {
@@ -28,7 +30,14 @@ func main() {
 	db.First(&product, "code = ?", "D42")
 	fmt.Println(product)
 
+	//gin日志
+	f, _ := os.Create("/tmp/gin.log")
+	gin.DefaultWriter = io.MultiWriter(f)
+	// 如果需要将日志同时写入文件和控制台，请使用以下代码
+	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
+
 	r := gin.Default()
+
 	v1 := r.Group("/api/v1.0/internal")
 	{
 		v1.GET("/status", route.Heartbeat)

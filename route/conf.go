@@ -7,13 +7,13 @@ import (
 )
 
 type Content struct {
-	Source   string                 `json:"source"`
-	Id       int                    `json:"id"`
-	Sservice string                 `json:"service"`
-	Bt       string                 `json:"bt"`
-	Sbt      string                 `json:"sbt"`
-	Op       string                 `json:"op"`
-	Data     map[string]interface{} `json:"data"`
+	Source  string                 `json:"source"`
+	Id      int                    `json:"id"`
+	Service string                 `json:"service"`
+	Bt      string                 `json:"bt"`
+	Sbt     string                 `json:"sbt"`
+	Op      string                 `json:"op"`
+	Data    map[string]interface{} `json:"data"`
 }
 
 type Contents struct {
