@@ -6,11 +6,18 @@ import (
 )
 
 type Switch struct {
-	gorm.Model
-	Bt     string
-	Sbt    string
-	Switch string
+	gorm.Model `json:"-"`
+	Bt         string `gorm:"type:varchar(40);not null" json:"bt"`
+	Sbt        string `gorm:"type:varchar(40);not null" json:"sbt"`
+	Service    string `gorm:"type:varchar(8);not null" json:"service"`
+	Switch     string `gorm:"type:varchar(8);not null" json:"switch"`
 }
 
-//func (s *Switch) Update() {
-//}
+func () GetSwitchs() []Switch {
+	switchs := []Switch{}
+	db.Find(&switchs)
+	return switchs
+}
+
+func (s *Switch) UpdateSwitch(bt, sbt, service, status, string) {
+}

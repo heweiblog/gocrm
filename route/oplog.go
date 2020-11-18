@@ -2,6 +2,7 @@ package route
 
 import (
 	"github.com/gin-gonic/gin"
+	"gocrm/models"
 	"strconv"
 )
 
@@ -12,10 +13,5 @@ func GetOplog(c *gin.Context) {
 		c.JSON(200, gin.H{})
 		return
 	}
-	c.JSON(200, gin.H{
-		"status":  "recevied",
-		"versiom": version,
-		"limit":   limit,
-	})
-
+	c.JSON(200, models.GetOplogs(version, limit))
 }

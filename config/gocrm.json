@@ -6,11 +6,11 @@
     },
 	"_": "mysql配置",
     "Sql": {
-        "Ip": "192.168.5.41",
+        "Ip": "192.168.15.124",
         "Port": 3306,
         "User": "root",
-        "Pass": "123456",
-        "Database": "test"
+        "Pass": "HeYiChen@17791",
+        "Database": "gocrm"
     },
 	"_": "bind配置",
     "Ybind": {
