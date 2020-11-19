@@ -19,7 +19,7 @@ func main() {
 	v1 := r.Group("/api/v1.0/internal")
 	{
 		v1.GET("/status", route.Heartbeat)
-		v1.GET("/configs", route.GetConfig)
+		v1.GET("/configs", route.GetConfigs)
 		v1.POST("/configs", route.PostConfig)
 		v1.POST("/all-configs", route.AllConfig)
 		v1.GET("/oplog", route.GetOplog)

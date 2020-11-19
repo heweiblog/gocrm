@@ -14,7 +14,7 @@ type Task struct {
 }
 
 type Tasks struct {
-	Contents []Content `json:"contents"`
+	Contents []Task `json:"contents"`
 }
 
 func GetTask(c *gin.Context) {

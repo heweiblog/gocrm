@@ -13,11 +13,11 @@ type Switch struct {
 	Switch     string `gorm:"type:varchar(8);not null" json:"switch"`
 }
 
-func () GetSwitchs() []Switch {
+func GetSwitchs() []Switch {
 	switchs := []Switch{}
-	db.Find(&switchs)
+	DB.Find(&switchs)
 	return switchs
 }
 
-func (s *Switch) UpdateSwitch(bt, sbt, service, status, string) {
-}
+//func (s *Switch) UpdateSwitch(bt, sbt, service, status, string) {
+//}
