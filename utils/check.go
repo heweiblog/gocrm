@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"gocrm/models"
+	"reflect"
 )
 
 type BaseMap map[string]map[string]map[string]func(c *models.Content) string
@@ -15,7 +16,25 @@ type ResponseCode struct {
 }
 
 func ResponseCodeCheck(c *models.Content) string {
-	m := make(map[string]interface{})
+	r := ResponseCode{-0x7f7f}
+	if err := json.Unmarshal(c.Data, &r); err != nil {
+		return err.Error()
+	}
+	fmt.Println(reflect.TypeOf(r))
+	if r.Responsecode == -0x7f7f {
+		return "responsecode not in data"
+	}
+	if r.Responsecode < 0 || r.Responsecode > 0xffffffff {
+		return "responsecode range error"
+	}
+	//models.DB.Create(c)
+	return ""
+}
+
+/*
+func ResponseCodeCheck(c *models.Content) string {
+	//m := make(map[string]interface{})
+	var m interface{}
 	if err := json.Unmarshal(c.Data, &m); err != nil {
 		return err.Error()
 	}
@@ -31,6 +50,7 @@ func ResponseCodeCheck(c *models.Content) string {
 	}
 	return "responsecode not in data"
 }
+*/
 
 func init() {
 	CheckMethods = make(BaseMap)
