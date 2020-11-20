@@ -7,9 +7,9 @@ import (
 
 type Switch struct {
 	gorm.Model `json:"-"`
-	Bt         string `gorm:"type:varchar(40);not null" json:"bt"`
-	Sbt        string `gorm:"type:varchar(40);not null" json:"sbt"`
-	Service    string `gorm:"type:varchar(8);not null" json:"service"`
+	Bt         string `gorm:"type:varchar(40);not null" json:"-"`
+	Sbt        string `gorm:"type:varchar(40);not null" json:"-"`
+	Service    string `gorm:"type:varchar(8);not null" json:"-"`
 	Switch     string `gorm:"type:varchar(8);not null" json:"switch"`
 }
 
