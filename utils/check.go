@@ -2,15 +2,14 @@ package utils
 
 import (
 	"encoding/json"
-	"fmt"
 	"gocrm/models"
-	"reflect"
 )
 
-type BaseMap map[string]map[string]map[string]func(c *models.Content) string
+type BaseMap map[string]func(c *models.Content) string
 
 var CheckMethods BaseMap
 
+/*
 type ResponseCode struct {
 	Responsecode int `json:"responsecode"`
 }
@@ -30,35 +29,43 @@ func ResponseCodeCheck(c *models.Content) string {
 	//models.DB.Create(c)
 	return ""
 }
+*/
 
-/*
+func SwitchCheck(c *models.Content) string {
+	m := make(map[string]interface{})
+	if err := json.Unmarshal(c.Data, &m); err != nil {
+		return err.Error()
+	}
+	if res, ok := m["switch"]; ok {
+		if res, ok = res.(string); ok {
+			if res == "enable" || res == "disable" {
+				return ""
+			}
+		}
+	}
+	return "switch format error"
+}
+
 func ResponseCodeCheck(c *models.Content) string {
-	//m := make(map[string]interface{})
-	var m interface{}
+	m := make(map[string]interface{})
 	if err := json.Unmarshal(c.Data, &m); err != nil {
 		return err.Error()
 	}
 	if res, ok := m["responsecode"]; ok {
-		if fcode, ok := res.(float64); ok {
-			code := int(fcode)
-			if code < 0 || code > 0xffffffff {
-				return "responsecode range error"
+		if rcode, ok := res.(float64); ok {
+			code := int(rcode)
+			if code > 0 && code <= 0xffffffff {
+				return ""
 			}
-			models.DB.Create(c)
-			return ""
+			return "responsecode range error"
+			//models.DB.Create(c)
 		}
 	}
-	return "responsecode not in data"
+	return "responsecode format error"
 }
-*/
 
 func init() {
 	CheckMethods = make(BaseMap)
-	fmt.Println(CheckMethods)
-	m := make(map[string]func(c *models.Content) string)
-	m["responserules"] = ResponseCodeCheck
-	n := make(map[string]map[string]func(c *models.Content) string)
-	n["selfcheck"] = m
-	CheckMethods["handle"] = n
-	fmt.Println(CheckMethods)
+	CheckMethods["handle"+"selfcheck"+"responserules"] = ResponseCodeCheck
+	CheckMethods["handle"+"selfcheck"+"switch"] = SwitchCheck
 }
