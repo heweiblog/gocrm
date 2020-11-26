@@ -1,10 +1,9 @@
 package main
 
 import (
-	"gocrm/route"
-	//"gocrm/cmd"
+	"gocrm/cmd"
 )
 
 func main() {
-	route.Server()
+	cmd.Execute()
 }

@@ -3,20 +3,24 @@ package route
 import (
 	"github.com/gin-gonic/gin"
 	"gocrm/controller"
-	//"io"
-	//"os"
+	"io"
+	"os"
 )
 
-func Server() {
-	//gin日志
-	//f, _ := os.Create("/tmp/gin.log")
-	//gin.DefaultWriter = io.MultiWriter(f)
+func initEngine() *gin.Engine {
+	// gin日志
+	f, _ := os.Create("/tmp/gocrm.log")
+	gin.DefaultWriter = io.MultiWriter(f)
+
 	// 如果需要将日志同时写入文件和控制台，请使用以下代码
-	//gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
+	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 
-	r := gin.Default()
+	// 引擎
+	return gin.Default()
+}
 
-	v1 := r.Group("/api/v1.0/internal")
+func initApiRoute(g *gin.Engine) {
+	v1 := g.Group("/api/v1.0/internal")
 	{
 		v1.GET("/status", controller.Heartbeat)
 		v1.GET("/configs", controller.GetConfigs)
@@ -28,6 +32,10 @@ func Server() {
 		v1.DELETE("/tasks", controller.DeleteTask)
 		v1.GET("/pro", controller.GetProduct)
 	}
+}
 
-	r.Run(":9999")
+func Server(addr string) {
+	g := initEngine()
+	initApiRoute(g)
+	g.Run(addr)
 }
