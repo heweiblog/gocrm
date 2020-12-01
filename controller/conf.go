@@ -10,6 +10,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"reflect"
+	"time"
 )
 
 type Contents struct {
@@ -19,7 +20,7 @@ type Contents struct {
 
 func testPost(request Contents) {
 	url := "http://127.0.0.1:22222/"
-
+	time.Sleep(time.Second * 5)
 	requestBody := new(bytes.Buffer)
 	json.NewEncoder(requestBody).Encode(request)
 
@@ -52,23 +53,29 @@ func PostConfig(c *gin.Context) {
 		return
 	} else {
 		fmt.Println("recv:", reflect.TypeOf(d), d)
-		for i := 0; i < len(d.Contents); i++ {
-			key := d.Contents[i].Service + d.Contents[i].Bt + d.Contents[i].Sbt
-			if _, ok := utils.CheckMethods[key]; ok {
-				//校验模块
-				if res := utils.CheckMethods[key](&d.Contents[i]); res == "" {
-					//校验通过 入队(通道)
-					testPost(d)
-					fmt.Println("数据校验通过")
-				} else {
-					//校验失败，直接记录oplog，或者发到通道，在另一个协程中收取写入
-					fmt.Println("数据校验失败", res)
-				}
-			} else {
-				//service bt sbt或对应的函数有问题，直接记录oplog失败，或者发到通道，在另一个协程中收取写入
-				fmt.Println("数据大格式错误")
-			}
+		if res := utils.CheckData(d.MsRelease, d.Contents); res != "" {
+			c.JSON(200, gin.H{"rcode": 1, "description": res})
+			return
 		}
+		/*
+			for i := 0; i < len(d.Contents); i++ {
+				key := d.Contents[i].Service + d.Contents[i].Bt + d.Contents[i].Sbt
+				if f, ok := utils.CheckMethods[key]; ok {
+					//校验模块
+					if res := f(&d.Contents[i]); res == "" {
+						//校验通过 入队(通道) 直接启动协程
+						go testPost(d)
+						fmt.Println("数据校验通过")
+					} else {
+						//校验失败，直接记录oplog，或者发到通道，在另一个协程中收取写入
+						fmt.Println("数据校验失败", res)
+					}
+				} else {
+					//service bt sbt或对应的函数有问题，直接记录oplog失败，或者发到通道，在另一个协程中收取写入
+					fmt.Println("数据大格式错误")
+				}
+			}
+		*/
 	}
 	c.JSON(200, gin.H{
 		"status": "received",

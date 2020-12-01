@@ -32,8 +32,9 @@ type Content struct {
 }
 
 type Contents struct {
-	MsRelease string    `json:"msrelease"`
-	Contents  []Content `json:"contents"`
+	MsRelease string `json:"msrelease"`
+	//Contents  []Content `json:"contents"`
+	Contents []map[string]interface{} `json:"contents"`
 }
 
 func testPost(request Contents) {
@@ -71,27 +72,29 @@ func PostConfig(c *gin.Context) {
 		return
 	} else {
 		fmt.Println("recv:", reflect.TypeOf(d), d)
+		fmt.Println("recv data:", reflect.TypeOf(d.Contents[0]["data"]), d.Contents[0]["data"])
+		fmt.Println("recv bt:", d.Contents[0]["bt"])
 
-		for i := 0; i < len(d.Contents); i++ {
-			fmt.Println("recv:", reflect.TypeOf(d.Contents[i].Data), d.Contents[i].Data)
+		/*
+			for i := 0; i < len(d.Contents); i++ {
+				fmt.Println("recv:", reflect.TypeOf(d.Contents[i].Data), d.Contents[i].Data)
 
-			/*
-				if _, ok := utils.CheckMethods[d.Contents[i].Service][d.Contents[i].Bt][d.Contents[i].Sbt]; ok {
-					//校验模块
-					if res := utils.CheckMethods[d.Contents[i].Service][d.Contents[i].Bt][d.Contents[i].Sbt](&d.Contents[i]); res == "" {
-						//校验通过 入队(通道)
-						testPost(d)
-						fmt.Println("数据校验通过")
+					if _, ok := utils.CheckMethods[d.Contents[i].Service][d.Contents[i].Bt][d.Contents[i].Sbt]; ok {
+						//校验模块
+						if res := utils.CheckMethods[d.Contents[i].Service][d.Contents[i].Bt][d.Contents[i].Sbt](&d.Contents[i]); res == "" {
+							//校验通过 入队(通道)
+							testPost(d)
+							fmt.Println("数据校验通过")
+						} else {
+							//校验失败，直接记录oplog，或者发到通道，在另一个协程中收取写入
+							fmt.Println("数据校验失败", res)
+						}
 					} else {
-						//校验失败，直接记录oplog，或者发到通道，在另一个协程中收取写入
-						fmt.Println("数据校验失败", res)
+						//service bt sbt或对应的函数有问题，直接记录oplog失败，或者发到通道，在另一个协程中收取写入
+						fmt.Println("数据大格式错误")
 					}
-				} else {
-					//service bt sbt或对应的函数有问题，直接记录oplog失败，或者发到通道，在另一个协程中收取写入
-					fmt.Println("数据大格式错误")
-				}
-			*/
-		}
+			}
+		*/
 	}
 	c.JSON(200, gin.H{
 		"status": "received",
