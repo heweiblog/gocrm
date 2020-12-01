@@ -28,3 +28,12 @@ func GetOplogs(start, limit int) []Content {
 	DB.Where("id >= ? AND id < ?", start, start+limit).Find(&oplogs)
 	return oplogs
 }
+
+func GetOplogId() (uint, uint) {
+	var c Content
+	r := DB.Last(&c)
+	if r.Error != nil {
+		return 0, 0
+	}
+	return c.Mid, c.Id
+}

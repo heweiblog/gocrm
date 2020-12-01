@@ -18,10 +18,21 @@ type BaseMap map[string]func(c *models.Content) string
 var (
 	OpMap        map[string]bool
 	CheckMethods BaseMap
+	MsRelease    string
 )
+
+func init() {
+	OpMap = make(map[string]bool)
+	OpMap["add"] = true
+	OpMap["delete"] = true
+	OpMap["update"] = true
+	OpMap["clear"] = true
+	OpMap["query"] = true
+}
 
 func CheckData(release string, contents []models.Content) string {
 	//记录 ms release
+	MsRelease = release
 	for i := 0; i < len(contents); i++ {
 		if contents[i].Service != DnsService && contents[i].Service != ZrpService {
 			return "service value error"
@@ -60,28 +71,6 @@ func CheckData(release string, contents []models.Content) string {
 	return ""
 }
 
-/*
-type ResponseCode struct {
-	Responsecode int `json:"responsecode"`
-}
-
-func ResponseCodeCheck(c *models.Content) string {
-	r := ResponseCode{-0x7f7f}
-	if err := json.Unmarshal(c.Data, &r); err != nil {
-		return err.Error()
-	}
-	fmt.Println(reflect.TypeOf(r))
-	if r.Responsecode == -0x7f7f {
-		return "responsecode not in data"
-	}
-	if r.Responsecode < 0 || r.Responsecode > 0xffffffff {
-		return "responsecode range error"
-	}
-	//models.DB.Create(c)
-	return ""
-}
-*/
-
 func SwitchCheck(c *models.Content) string {
 	m := make(map[string]interface{})
 	if err := json.Unmarshal(c.Data, &m); err != nil {
@@ -113,15 +102,6 @@ func ResponseCodeCheck(c *models.Content) string {
 		}
 	}
 	return "responsecode format error"
-}
-
-func init() {
-	OpMap = make(map[string]bool)
-	OpMap["add"] = true
-	OpMap["delete"] = true
-	OpMap["update"] = true
-	OpMap["clear"] = true
-	OpMap["query"] = true
 }
 
 func init() {
