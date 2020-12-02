@@ -23,6 +23,7 @@ func initApiRoute(g *gin.Engine) {
 	v1 := g.Group("/api/v1.0/internal")
 	{
 		v1.GET("/status", controller.Heartbeat)
+		v1.POST("/status", controller.ResetMsId)
 		v1.GET("/configs", controller.GetConfigs)
 		v1.POST("/configs", controller.PostConfig)
 		v1.POST("/all-configs", controller.AllConfig)
@@ -30,7 +31,6 @@ func initApiRoute(g *gin.Engine) {
 		v1.GET("/tasks", controller.GetTask)
 		v1.POST("/tasks", controller.PostTask)
 		v1.DELETE("/tasks", controller.DeleteTask)
-		v1.GET("/pro", controller.GetProduct)
 	}
 }
 

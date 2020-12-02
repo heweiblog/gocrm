@@ -14,6 +14,7 @@ type Content struct {
 	Source  string         `gorm:"type:varchar(4);not null" json:"source"`
 	Service string         `gorm:"type:varchar(8);not null" json:"service"`
 	Op      string         `gorm:"type:varchar(8);not null" json:"op"`
+	Status  string         `gorm:"type:varchar(8);not null" json:"status"`
 	Reason  string         `gorm:"type:varchar(80)" json:"reason"`
 	Data    datatypes.JSON `gorm:"type:json" json:"data"`
 }
@@ -29,11 +30,29 @@ func GetOplogs(start, limit int) []Content {
 	return oplogs
 }
 
-func GetOplogId() (uint, uint) {
+func GetDevId() uint {
 	var c Content
 	r := DB.Last(&c)
 	if r.Error != nil {
-		return 0, 0
+		return 0
 	}
-	return c.Mid, c.Id
+	return c.Id
+}
+
+func GetMsId() uint {
+	var c Content
+	r := DB.Order("mid desc, mid").First(&c)
+	if r.Error != nil {
+		return 0
+	}
+	return c.Mid
+}
+
+func SetMsId(mid uint) {
+	var c Content
+	r := DB.Order("mid desc, mid").First(&c)
+	if r.Error != nil {
+		return
+	}
+	DB.Model(&c).Update("mid", mid)
 }
