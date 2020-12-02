@@ -21,7 +21,7 @@ func init() {
 	if err != nil {
 		log.Panic(err)
 	}
-	DB.AutoMigrate(&Content{})
+	DB.AutoMigrate(&Content{}, &Register{})
 	/*
 		n := make(map[string]interface{})
 		n["1"] = 111

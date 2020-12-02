@@ -26,7 +26,7 @@ func initApiRoute(g *gin.Engine) {
 		v1.POST("/status", controller.ResetMsId)
 		v1.GET("/configs", controller.GetConfigs)
 		v1.POST("/configs", controller.PostConfig)
-		v1.POST("/all-configs", controller.AllConfig)
+		v1.POST("/all-configs", controller.RegisterConf)
 		v1.GET("/oplog", controller.GetOplog)
 		v1.GET("/tasks", controller.GetTask)
 		v1.POST("/tasks", controller.PostTask)
